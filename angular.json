@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "GitHubActionsWithNg"
+    }
+  },
+  "defaultProject": "GitHubActionsWithNg",
+  "cli": {
+    "analytics": "a936a81f-4990-4eb1-bb20-e51d3a2d91ed"
+  }
 }
