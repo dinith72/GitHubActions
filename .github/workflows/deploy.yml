@@ -24,6 +24,24 @@ jobs:
         with:
           name: dist
           path: dist
+  # deploy:
+  #   name: Deploy
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Repo
+  #       uses: actions/checkout@master
+  #     - name: Download Artifact
+  #       uses: actions/download-artifact@master
+  #       with:
+  #         name: dist
+  #         path: dist
+  #     - name: Deploy to Firebase
+  #       uses: w9jds/firebase-action@master
+  #       with:
+  #         args: deploy --only hosting
+  #       env:
+  #         FIREBASE_TOKEN: ${{ secrets.SAMPLESECRET }}
   deploy:
     name: Deploy
     needs: build
@@ -36,9 +54,19 @@ jobs:
         with:
           name: dist
           path: dist
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
+      # - name: Deploy to Firebase
+      #   uses: w9jds/firebase-action@master
+      #   with:
+      #     args: deploy --only hosting
+      #   env:
+      #     FIREBASE_TOKEN: ${{ secrets.SAMPLESECRET }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.SAMPLESECRET }}
+          aws-access-key-id: ${{ secrets.AWS_ACESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_ACESS_SECRET }}
+          aws-region: ap-southeast-2
+
+      - name: Deploy static site to S3 bucket
+        run: aws s3 sync ./dist/ s3://<your-website-bucket> --delete
