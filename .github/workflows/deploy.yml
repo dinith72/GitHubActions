@@ -61,10 +61,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_ACESS_SECRET }}
           aws-region: ap-southeast-2
 
-      ### deploy  a build to backup bucket #####
-      # - name: add to the backup bucket
-      #  run: aws s3 sync ./dist/GitHubActionsWithNg s3://irentaa-dev-bucket/BuildBackups/WebApp/irenta_bak_$(date '+%Y-%m-%d')
-
       ### backup the existing build to backup bucket ###
       - name: copy the current version to backup bucket
         run: aws s3 cp s3://irentaa-dev-webapp s3://irentaa-dev-bucket/BuildBackups/WebApp/irenta_bak_$(date '+%Y-%m-%d')
