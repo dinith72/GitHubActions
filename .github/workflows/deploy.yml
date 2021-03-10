@@ -63,8 +63,8 @@ jobs:
 
       ### deploy  a build to backup bucket #####
       - name: add to the backup bucket
-        run: aws s3 sync ./dist/GitHubActionsWithNg s3://irentaa-dev-webapp
+        run: aws s3 sync ./dist/GitHubActionsWithNg s3://irentaa-dev-bucket/BuildBackups/WebApp/today
 
       ### deploy the website #######
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync ./dist/GitHubActionsWithNg s3://irentaa-dev-bucket/BuildBackups/WebApp/today
+        run: aws s3 sync ./dist/GitHubActionsWithNg s3://irentaa-dev-webapp
