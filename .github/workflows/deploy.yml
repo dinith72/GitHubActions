@@ -63,7 +63,7 @@ jobs:
 
       ### backup the existing build to backup bucket ###
       - name: copy the current version to backup bucket
-        run: aws s3 cp s3://irentaa-dev-webapp s3://irentaa-dev-bucket/BuildBackups/WebApp/irenta_bak_$(date '+%Y-%m-%d')
+        run: aws s3 cp s3://irentaa-dev-webapp s3://irentaa-dev-bucket/BuildBackups/WebApp/irentaa_bak_$(date '+%Y-%m-%d') --recursive
 
       ### deploy the website #######
       - name: Deploy static site to S3 bucket
